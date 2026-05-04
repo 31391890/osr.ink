@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSR.INK - 户外生存救援指南 （展示站）| Outdoor Survival Rescue</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        /* 容器样式 - 宽屏适配核心 */
+        .container {
+            width: 100%;
+            max-width: 1400px; /* 宽屏最大宽度 */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background: linear-gradient(135deg, #2d5a27 0%, #1a3a16 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: #f0e6d3;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #f0e6d3;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .emergency-btn {
+            background-color: #dc2626;
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .emergency-btn:hover {
+            background-color: #b91c1c;
+            color: #fff !important;
+        }
+
+        /* 英雄区样式 */
+        .hero {
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), 
+                        url('https://picsum.photos/id/29/1920/1080') center/cover no-repeat;
+            color: #f0e6d3;
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #d1d5db;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 2rem 0;
+        }
+
+        .hero-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-icon .icon {
+            font-size: 2.5rem;
+        }
+
+        .hero-icon .label {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            background-color: #2d5a27;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button.secondary {
+            background-color: #4b5563;
+        }
+
+        .cta-button:hover {
+            background-color: #1a3a16;
+        }
+
+        .cta-button.secondary:hover {
+            background-color: #374151;
+        }
+
+        /* 通用区块样式 */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #1a3a16;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #4b5563;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 技能区块 */
+        .skills {
+            background-color: #fff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .skill-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a3a16;
+            text-align: center;
+        }
+
+        .skill-card p {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-level {
+            display: inline-block;
+            background-color: #e5e7eb;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #1a3a16;
+            font-weight: bold;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            width: fit-content;
+        }
+
+        /* 求救指南区块 */
+        .rescue {
+            background-color: #f0f8f0;
+        }
+
+        .rescue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .rescue-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .rescue-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1a3a16;
+        }
+
+        .rescue-card ul {
+            list-style: none;
+        }
+
+        .rescue-card li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+
+        .rescue-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* 装备区块 */
+        .gear {
+            background-color: #fff;
+        }
+
+        .gear-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+
+        .gear-tab {
+            background-color: #f0f8f0;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: #1a3a16;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gear-tab.active {
+            background-color: #2d5a27;
+            color: #fff;
+        }
+
+        .gear-tab:hover:not(.active) {
+            background-color: #e5f0e5;
+        }
+
+        .gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gear-item {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gear-img {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gear-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #1a3a16;
+        }
+
+        .gear-content p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .gear-star {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        /* 案例区块 */
+        .cases {
+            background-color: #f0f8f0;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .case-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-img {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .case-content .date {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .case-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1a3a16;
+            text-align: center;
+        }
+
+        .case-content p {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .case-tag {
+            display: inline-block;
+            background-color: #e5f0e5;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #1a3a16;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 关于我们区块 */
+        .about {
+            background-color: #fff;
+            padding: 6rem 0;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        .about-content strong {
+            color: #1a3a16;
+            font-size: 1.2rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            background-color: #f0f8f0;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a3a16;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #4b5563;
+            font-size: 1.1rem;
+        }
+
+        /* 订阅区块 */
+        .subscribe {
+            background: linear-gradient(135deg, #1a3a16 0%, #2d5a27 100%);
+            padding: 6rem 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .subscribe-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .subscribe-btn {
+            background-color: #dc2626;
+            color: #fff;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .subscribe-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #17252a;
+            color: #cbd5e0;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #f0e6d3;
+            border-bottom: 2px solid #2d5a27;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2d3748;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 20px 0;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-icons {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .skill-level {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🧭</span>
+                户外生存救援指南
+            </a>
+            <ul class="nav-links">
+                <li><a href="dn.html">域名释义</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#rescue">求救</a></li>
+                <li><a href="#gear">装备</a></li>
+                <li><a href="#cases">案例</a></li>
+                <li><a href="#emergency" class="emergency-btn">🆘 紧急求助</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>OSR·户外生存救援指南</h1>
+            <p class="subtitle">Outdoor · Survival · Rescue</p>
+            <p class="subtitle">户外 · 生存 · 求救</p>
+            
+            <div class="hero-icons">
+                <div class="hero-icon">
+                    <span class="icon">🏕️</span>
+                    <span class="label">户外</span>
+                </div>
+                <div class="hero-icon">
+                    <span class="icon">🔥</span>
+                    <span class="label">生存</span>
+                </div>
+                <div class="hero-icon">
+                    <span class="icon">🆘</span>
+                    <span class="label">求救</span>
+                </div>
+            </div>
+
+            <p>专业野外生存技能指南 · 真实救援案例记录 · 守护每一次户外探险<p>本站为域名概念展示站，无实际功能。购买域名请联系：ai@altoai.cn</p>
+            
+            <div class="cta-buttons">
+                <a href="dn.html" class="cta-button">学习技能</a>
+                <a href="dn.html" class="cta-button secondary">查看案例</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心生存技能 -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">核心生存技能</h2>
+        <p class="section-subtitle">掌握这些技能，让野外生存不再是挑战</p>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🔥</div>
+                <h3>生火技巧</h3>
+                <p>掌握多种生火方法，包括摩擦生火、打火石、放大镜取火等，确保在寒冷环境中保持体温</p>
+                <span class="skill-level">基础必修</span>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">💧</div>
+                <h3>水源获取</h3>
+                <p>识别可饮用水源，掌握净水、过滤、煮沸等处理方法，预防水源性疾病</p>
+                <span class="skill-level">基础必修</span>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">⛺</div>
+                <h3>庇护所搭建</h3>
+                <p>利用自然环境材料搭建临时庇护所，防风防雨防野兽，保障夜间安全</p>
+                <span class="skill-level">基础必修</span>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🧭</div>
+                <h3>方向定位</h3>
+                <p>学会使用指南针、地图、星象、自然标志等多种方式确定方向和位置</p>
+                <span class="skill-level">进阶技能</span>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🍖</div>
+                <h3>食物获取</h3>
+                <p>识别可食用植物、昆虫、鱼类，掌握狩猎和采集技巧，补充能量来源</p>
+                <span class="skill-level">进阶技能</span>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🩹</div>
+                <h3>野外急救</h3>
+                <p>处理外伤、骨折、中毒、中暑等紧急情况，掌握基础医疗救护知识</p>
+                <span class="skill-level">基础必修</span>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">🍖</div>
+                <h3>食物获取</h3>
+                <p>识别可食用植物、昆虫、鱼类，掌握狩猎和采集技巧，补充能量来源</p>
+                <span class="skill-level">进阶技能</span>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🩹</div>
+                <h3>野外急救</h3>
+                <p>处理外伤、骨折、中毒、中暑等紧急情况，掌握基础医疗救护知识</p>
+                <span class="skill-level">基础必修</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 求救指南 -->
+    <section class="rescue" id="rescue">
+        <h2 class="section-title">求救指南</h2>
+        <p class="section-subtitle">遇到危险时，正确求救是生存的关键</p>
+        
+        <div class="rescue-grid">
+            <div class="rescue-card">
+                <h3>📶 信号发送</h3>
+                <ul>
+                    <li>国际求救信号SOS（三短三长三短）</li>
+                    <li>烟火信号（白天烟雾、夜晚火光）</li>
+                    <li>反光信号（镜子、金属片反射阳光）</li>
+                    <li>地面信号（用石头/树枝摆出SOS）</li>
+                </ul>
+            </div>
+            
+            <div class="rescue-card">
+                <h3>📍 位置报告</h3>
+                <ul>
+                    <li>使用GPS设备记录坐标</li>
+                    <li>描述周围明显地标特征</li>
+                    <li>报告人数、伤情、物资状况</li>
+                    <li>保持通讯设备电量充足</li>
+                </ul>
+            </div>
+            
+            <div class="rescue-card">
+                <h3>📞 紧急联系</h3>
+                <ul>
+                    <li>中国救援电话：110/120</li>
+                    <li>山地救援：当地林业局</li>
+                    <li>卫星电话：国际救援卫星</li>
+                    <li>提前告知行程给亲友</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 必备装备清单 -->
+    <section class="gear" id="gear">
+        <h2 class="section-title">必备装备清单</h2>
+        <p class="section-subtitle">工欲善其事，必先利其器</p>
+        
+        <div class="gear-tabs">
+            <button class="gear-tab active">基础装备</button>
+            <button class="gear-tab">进阶装备</button>
+            <button class="gear-tab">专业装备</button>
+        </div>
+        
+        <div class="gear-grid">
+            <div class="gear-item">
+                <div class="gear-img">🔪</div>
+                <div class="gear-content">
+                    <h3>多功能刀具</h3>
+                    <p>切割、搭建、防御多功能一体</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gear-item">
+                <div class="gear-img">🔦</div>
+                <div class="gear-content">
+                    <h3>强光手电筒</h3>
+                    <p>夜间照明、信号发送必备</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gear-item">
+                <div class="gear-img">💊</div>
+                <div class="gear-content">
+                    <h3>急救药包</h3>
+                    <p>创可贴、消毒用品、常用药品</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gear-item">
+                <div class="gear-img">🧭</div>
+                <div class="gear-content">
+                    <h3>指南针+地图</h3>
+                    <p>方向定位，防止迷路</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">☆</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gear-item">
+                <div class="gear-img">⛺</div>
+                <div class="gear-content">
+                    <h3>应急避难毯</h3>
+                    <p>保温、防雨、信号反射</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">☆</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gear-item">
+                <div class="gear-img">🔥</div>
+                <div class="gear-content">
+                    <h3>打火设备</h3>
+                    <p>打火机、打火石、防水火柴</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gear-item">
+                <div class="gear-img">🧭</div>
+                <div class="gear-content">
+                    <h3>指南针+地图</h3>
+                    <p>方向定位，防止迷路</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">☆</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gear-item">
+                <div class="gear-img">⛺</div>
+                <div class="gear-content">
+                    <h3>应急避难毯</h3>
+                    <p>保温、防雨、信号反射</p>
+                    <div class="gear-importance">
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">★</span>
+                        <span class="gear-star">☆</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 真实救援案例 -->
+    <section class="cases" id="cases">
+        <h2 class="section-title">真实救援案例</h2>
+        <p class="section-subtitle">从真实事件中学习，让经验成为你的护身符</p>
+        
+        <div class="case-grid">
+            <div class="case-item">
+                <div class="case-img">🏔️</div>
+                <div class="case-content">
+                    <p class="date">2025年10月 · 四川四姑娘山</p>
+                    <h3>登山迷路成功自救案例</h3>
+                    <p>3名登山爱好者因天气突变迷路，通过搭建临时庇护所、发送烟火信号，48小时后被救援队发现，全员安全获救。</p>
+                    <span class="case-tag">成功自救</span>
+                    <span class="case-tag">团队协作</span>
+                </div>
+            </div>
+            
+            <div class="case-item">
+                <div class="case-img">🌊</div>
+                <div class="case-content">
+                    <p class="date">2025年8月 · 云南虎跳峡</p>
+                    <h3>徒步失足骨折救援案例</h3>
+                    <p>1名徒步者失足摔伤骨折，同伴正确使用固定夹板、拨打救援电话并报告准确位置，2小时内专业救援队抵达完成转运。</p>
+                    <span class="case-tag">同伴互助</span>
+                    <span class="case-tag">专业救援</span>
+                </div>
+            </div>
+            
+            <div class="case-item">
+                <div class="case-img">🌲</div>
+                <div class="case-content">
+                    <p class="date">2026年3月 · 东北长白山</p>
+                    <h3>雪地迷路72小时生存案例</h3>
+                    <p>2名滑雪爱好者偏离路线被困雪地，通过搭建雪洞庇护所、保持体温、使用卫星电话求救，72小时后成功获救。</p>
+                    <span class="case-tag">极限生存</span>
+                    <span class="case-tag">耐心等待</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <h2 class="section-title">关于 OSR.INK</h2>
+        <div class="about-content">
+            <p><strong>OSR.INK</strong> 是一个专业的户外生存救援知识平台，致力于为全球户外爱好者提供系统化的生存技能培训和救援知识分享。</p>
+            <p>我们的团队由专业救援人员、资深户外教练和野外生存专家组成，所有内容经过实战验证和专业审核，确保实用性和安全性。</p>
+            <p>.INK后缀象征着"记录与传承"，我们希望通过记录真实案例、分享实用技能，让每一次户外探险都更加安全，让每一位爱好者都能掌握保命技能。</p>
+            
+            <div class="about-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">技能教程</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">128</span>
+                    <span class="stat-label">救援案例</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10万+</span>
+                    <span class="stat-label">用户学习</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">合作救援队</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 订阅区域 -->
+    <section class="subscribe">
+        <h2 class="section-title" style="color: #f0e6d3;">订阅生存指南</h2>
+        <p>获取最新技能教程、装备评测和救援资讯</p>
+        <form class="subscribe-form">
+            <input type="email" placeholder="请输入您的邮箱地址" required>
+            <button type="submit" class="subscribe-btn">立即订阅</button>
+        </form>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#skills">技能教程</a></li>
+                    <li><a href="#rescue">求救指南</a></li>
+                    <li><a href="#gear">装备清单</a></li>
+                    <li><a href="#cases">救援案例</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>资源下载</h4>
+                <ul>
+                    <li><a href="#">生存技能手册PDF</a></li>
+                    <li><a href="#">急救流程图</a></li>
+                    <li><a href="#">装备检查清单</a></li>
+                    <li><a href="#">紧急联系表模板</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>紧急联系</h4>
+                <ul>
+                    <li>📞 中国救援：110/120</li>
+                    <li>📞 山地救援：当地林业局</li>
+                    <li>📞 卫星救援：+86-XXX-XXXX</li>
+                    <li>📧 邮箱：help@osr.ink</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>免责声明</h4>
+                <p style="font-size: 0.85rem; color: #cbd5e0; line-height: 1.6;">
+                    本站内容仅供参考和学习，实际野外环境复杂多变，请务必接受专业训练并配备专业装备。户外活动有风险，参与需谨慎。
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 OSR.INK 版权所有 | Outdoor Survival Rescue · 户外生存救援指南</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+                <a href="#" style="color: #718096; margin: 0 0.5rem;">隐私政策</a> | 
+                <a href="#" style="color: #718096; margin: 0 0.5rem;">使用条款</a> | 
+                <a href="#" style="color: #718096; margin: 0 0.5rem;">联系我们</a><p>
+        <p style="margin-top: 1.15rem; font-size: 0.91rem;">本页面仅用于域名展示，不构成任何商业承诺</p>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 紧急求助按钮处理
+        document.querySelector('.emergency-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('⚠️ 紧急求助提示：\n本站为域名展示站，购买域名联系：ai@altoai.cn QQ：31391890\n1. 保持冷静\n2. 拨打当地救援电话\n3. 报告准确位置\n4. 描述人员状况\n\n中国救援电话：110/120\n山地救援：当地林业局');
+        });
+
+        // 装备标签切换
+        const gearTabs = document.querySelectorAll('.gear-tab');
+        gearTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                gearTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // 这里可以添加实际的装备分类切换逻辑
+            });
+        });
+
+        // 订阅表单处理
+        document.querySelector('.subscribe-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`✅ 订阅成功！\n\n我们将定期发送生存技能和救援资讯到：${email}\n\n感谢关注 OSR.INK`);
+            this.reset();
+        });
+
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'linear-gradient(135deg, #1a3a16 0%, #0d230a 100%)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.4)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #2d5a27 0%, #1a3a16 100%)';
+                navbar.style.boxShadow = '0 2px 15px rgba(0,0,0,0.3)';
+            }
+        });
+
+        // 滚动动画效果
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 为所有卡片添加动画效果
+        document.querySelectorAll('.skill-card, .rescue-card, .gear-item, .case-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body><body oncontextmenu="return false" onselectstart="return false" ondragstart="return false" onbeforecopy="return false" oncopy=document.selection.empty() onselect=document.selection.empty()>
+
+</html>
